@@ -8,3 +8,5 @@
 2. npm run dev ( starts the development server on your local port of the machine )
 
 ### The website is now running
+
+Check out the project live at https://fetch-frontend-take-home-ruddy.vercel.app/login
