@@ -1,4 +1,3 @@
-import { parse } from "cookie";
 import { NextResponse } from "next/server";
 
 const protectedRoutes = ["/home", "/favorites", "/"];
