@@ -10,3 +10,8 @@
 ### The website is now running
 
 Check out the project live at https://fetch-frontend-take-home-ruddy.vercel.app/login
+
+
+### Checkout some of the screenshots of the project
+
+<img width="1437" alt="Screenshot 2023-11-23 at 1 27 04 AM" src="https://github.com/rchavan10/Fetch-frontend-take-home/assets/96959435/568b9737-6485-4701-ac5e-5dfce0d994b9">
