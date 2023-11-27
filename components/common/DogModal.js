@@ -1,3 +1,4 @@
+import { useFavoritesStore } from "@/store/favoritesStore";
 import { tokens } from "@/theme/colorTokens";
 import { Close, Google } from "@mui/icons-material";
 import {
@@ -11,6 +12,7 @@ import {
   Typography,
   Box,
   Grid,
+  Button,
 } from "@mui/material";
 
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
@@ -20,6 +22,7 @@ const mapApiKey = process.env.NEXT_PUBLIC_MAP_API_KEY;
 export const DogModal = ({ dog, isOpen, handleCloseModal }) => {
   const theme = useTheme();
 
+  const { id, img, name, age, breed, zip_code } = dog;
   const colors = tokens(theme.palette.mode);
 
   const location = dog.location
@@ -36,6 +39,12 @@ export const DogModal = ({ dog, isOpen, handleCloseModal }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapApiKey,
   });
+
+  const addFavorite = useFavoritesStore((state) => state.addFavorite);
+  const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
+  const isFavorite = useFavoritesStore(
+    (state) => state.favorites && Object.keys(state.favorites).includes(id)
+  );
 
   return (
     <Dialog
@@ -134,6 +143,30 @@ export const DogModal = ({ dog, isOpen, handleCloseModal }) => {
                   Location: {finalLocation}
                 </Typography>
               )}
+              <Button
+              disabled={isFavorite}
+              variant="contained"
+              sx={{
+                borderRadius: 28,
+                paddingLeft: 5,
+                paddingRight: 5,
+                fontSize: 18,
+                width: "100%",
+                backgroundColor: `${theme.palette.secondary.main}`,
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: `${theme.palette.secondary.main}`,
+              },
+              }}
+              onClick={(e) =>{
+                e.stopPropagation();
+                const dogLocation = dog.location ?? null;
+                const item = { id, img, name, age, breed, zip_code, id, location: dogLocation };
+                isFavorite ? removeFavorite(id, item) : addFavorite(id, item);
+              }}
+              >
+                    Add to Favorites
+              </Button>
             </Stack>
           </Grid>
         </Grid>
