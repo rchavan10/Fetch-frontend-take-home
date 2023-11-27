@@ -22,7 +22,7 @@ Dark mode
 <img width="1429" alt="Screenshot 2023-11-23 at 1 31 49 AM" src="https://github.com/rchavan10/Fetch-frontend-take-home/assets/96959435/63763338-b061-4831-b939-8e6558ed5d2d">
 
 Dog Card with Google map location included (Extra feature)
-<img width="1439" alt="Screenshot 2023-11-23 at 1 32 43 AM" src="https://github.com/rchavan10/Fetch-frontend-take-home/assets/96959435/94ba24ab-c24e-4595-916d-1686b24fd596">
+<img width="1435" alt="Screenshot 2023-11-26 at 8 55 30 PM" src="https://github.com/rchavan10/Fetch-frontend-take-home/assets/96959435/093d84d2-cc7c-4a24-b8ee-8e5751832076">
 
 Favorites Page
 <img width="1427" alt="Screenshot 2023-11-23 at 1 33 53 AM" src="https://github.com/rchavan10/Fetch-frontend-take-home/assets/96959435/7db708ed-8a25-4615-acb8-ed98f375260c">
