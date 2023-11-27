@@ -12,7 +12,6 @@ import {
   usePersistedSearchStore,
   useSearchStore,
 } from "@/store/searchKeywordStore";
-import { Breeds } from "@/data/Breeds";
 import { useFilterStore } from "@/store/filtersStore";
 
 const useStyles = (theme) => ({
@@ -27,7 +26,7 @@ const useStyles = (theme) => ({
   },
 });
 
-export const SearchBar = () => {
+export const SearchBar = ({ Breeds }) => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const setSearchKeyword = useSearchStore((state) => state.setSearchKeyword);
@@ -54,7 +53,7 @@ export const SearchBar = () => {
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={Breeds}
+        options={Breeds || []}
         value={keyword !== "" ? keyword : null}
         onChange={(e, newValue) => setKeyword(newValue ?? "")}
         sx={{

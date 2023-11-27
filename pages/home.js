@@ -13,7 +13,7 @@ import axios from "axios";
 import { useSearchStore } from "@/store/searchKeywordStore";
 import { useFilterStore } from "@/store/filtersStore";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchDogsIds, fetchDogs, fetchLocations } from "@/utils/fetchData";
+import { fetchDogsIds, fetchDogs, fetchLocations, fetchBreeds } from "@/utils/fetchData";
 import { useRouter } from "next/router";
 
 const SortSelect = dynamic(
@@ -99,6 +99,24 @@ const home = () => {
     }
   );
 
+  const { data: breeds, 
+    isLoading: breedsLoading,
+    isError: breedsError,
+    isFetching: breedsFetching,
+    } = useQuery(["breeds"], fetchBreeds, 
+    {
+      enabled: !!dogs,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      keepPreviousData: true, 
+      onError: (error) => {
+        if (error?.response?.status === 401) {
+          handleAuthError();
+        }
+      },
+    });
+
   const {
     data: locations,
     isLoading: locationsLoading,
@@ -143,6 +161,10 @@ const home = () => {
       ? dogs
       : updateDogsWithLocations(dogs, locations);
 
+  const gotBreeds = breedsFetching ? [] : breeds;
+
+  console.log("Breeds", gotBreeds);
+
   useEffect(() => {
     return () => {
       if (isLoading || isFetching) {
@@ -158,6 +180,14 @@ const home = () => {
       }
     };
   }, [detailsLoading, detailsFetching]);
+
+  useEffect(() => {
+    return () => {
+      if (breedsLoading || breedsFetching) {
+        queryClient.cancelQueries("breeds");
+      }
+    };
+  }, [breedsLoading, breedsFetching]);
 
   useEffect(() => {
     return () => {
@@ -216,7 +246,7 @@ const home = () => {
                 lg={8.3}
                 sx={{ pt: 1.5, pl: { xs: 2, sm: 1, md: 0 } }}
               >
-                <SearchBar />
+                <SearchBar Breeds ={breeds} />
               </Grid>
 
               {!isSmallScreen && (
