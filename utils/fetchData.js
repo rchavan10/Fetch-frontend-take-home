@@ -26,6 +26,17 @@ export const fetchDogsIds = async (keyword, zipCode, age, page) => {
   return response.data;
 };
 
+export const fetchBreeds = async () => {
+  const response = await axios.get(baseURL + "/dogs/breeds", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true, // Include credentials (HTTP-only cookies)
+  });
+
+  return response.data;
+}
+
 export const fetchDogs = async (dogIds) => {
   const response = await axios.post(baseURL + "/dogs", dogIds, {
     headers: {
